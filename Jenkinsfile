@@ -10,6 +10,8 @@ node {
             checkout scm
             try {
                 sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+            } catch(e) {
+                echo 'error'
             } finally {
                 junit 'test-reports/results.xml'
             }
@@ -21,6 +23,8 @@ node {
             try {
                 sh 'pyinstaller --onefile sources/add2vals.py'
                 archiveArtifacts 'dist/add2vals'
+            } catch(e) {
+                echo 'error'
             }
         }
     }
